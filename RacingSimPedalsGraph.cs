@@ -169,11 +169,6 @@ public class GraphControl : Control
                 graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
             }
 
-            float pedal1Position = 50;
-            float pedalX = (pedal1Position - minX) * scaleX;
-            float pedalY = Height - 200;
-            graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
-
             // Border Graph Color
             string hexCode4 = "#f94c07";
             Color color4 = ColorTranslator.FromHtml(hexCode4);

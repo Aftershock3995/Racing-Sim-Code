@@ -13,7 +13,7 @@ namespace RacingSimPedals
 {
     public static class Program
     {
-
+        private static PedalDrawingForm pedalDrawingForm;
         private static GraphControl graphControl;
         private static ComboBox? comPortComboBox;
         private static Button? startButton;
@@ -56,6 +56,8 @@ namespace RacingSimPedals
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            pedalDrawingForm = new PedalDrawingForm(pedal1ResponseCurve);
 
             // Full App Color
             string hexCode1 = "#373737";
@@ -305,9 +307,8 @@ namespace RacingSimPedals
                     int position = int.Parse(data.Split(':')[1].Trim());
                     Console.WriteLine("Pedal 1 Position: " + position);
 
-                    // Update the pedal position in the GraphControl instance
-                    //Not used rn line movage fricked up
-                    //graphControl.UpdatePedalPosition(position);
+                    pedal1Position = position;
+                    pedalDrawingForm.Invalidate();
 
                     // Send the parsed position back over the serial port
                     string response = "Pedal 1 Position: " + position;
