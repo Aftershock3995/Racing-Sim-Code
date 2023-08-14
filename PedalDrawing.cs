@@ -7,9 +7,12 @@ namespace RacingSimPedals
     public class PedalDrawingForm : Form
     {
         public int pedal1Position { get; set; }
+        private Color lineColor; 
 
-        public PedalDrawingForm()
+        public PedalDrawingForm(string hexColor)
         {
+            lineColor = ColorTranslator.FromHtml(hexColor);
+
             Timer timer = new Timer();
             timer.Interval = 100; 
             timer.Tick += Timer_Tick;
@@ -28,7 +31,7 @@ namespace RacingSimPedals
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen linePen = new Pen(Color.Blue))
+            using (Pen linePen = new Pen(lineColor))
             {
                 float pedalX = (float)pedal1Position * Width / 100;
 
