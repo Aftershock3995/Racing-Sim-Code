@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace RacingSimPedals
@@ -9,33 +7,19 @@ namespace RacingSimPedals
     public class PedalDrawingForm : Form
     {
         public int pedal1Position { get; set; }
-        public int pedal2Position { get; set; }
-        public int pedal3Position { get; set; }
-        public int[] PedalGraphs { get; set; }
-        private List<PointF> dataPoints;
 
-        private float minX = 0f;
-        private float maxX = 1f;
-        private float minY = 0f;
-        private float maxY = 1f;
-
-        private static PedalDrawingForm pedalDrawingForm;
-
-        private Form mainForm;
-        public Form MainForm
+        public PedalDrawingForm()
         {
-            get => mainForm;
-            set => mainForm = value;
+            // Start the timer to update the pedal position
+            Timer timer = new Timer();
+            timer.Interval = 100; // Set your preferred interval
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
-        public PedalDrawingForm(List<PointF> newDataPoints)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            dataPoints = newDataPoints;
-        }
-
-        public void RefreshGraph(List<PointF> newDataPoints)
-        {
-            dataPoints = newDataPoints;
+            // Refresh the form to update the drawing
             Invalidate();
         }
 
@@ -46,35 +30,13 @@ namespace RacingSimPedals
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen markerPen = new Pen(Color.Red))
             using (Pen linePen = new Pen(Color.Blue))
             {
-                float scaleX = Width / (maxX - minX);
-                float scaleY = Height / (maxY - minY);
+                // Calculate the position of the pedal on the x-axis
+                float pedalX = (float)pedal1Position * Width / 100;
 
-                if (dataPoints.Count > 0)
-                {
-                    PointF[] curvePoints = new PointF[dataPoints.Count];
-
-                    for (int i = 0; i < dataPoints.Count; i++)
-                    {
-                        PointF point = dataPoints[i];
-                        float x = (point.X - minX) * scaleX;
-                        float y = Height - (point.Y - minY) * scaleY;
-                        curvePoints[i] = new PointF(x, y);
-                    }
-
-                    graphics.DrawCurve(linePen, curvePoints);
-
-                    foreach (PointF point in curvePoints)
-                    {
-                        graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
-                    }
-
-                    float pedalX = (pedal1Position - minX) * scaleX;
-                    float pedalY = Height - (pedal1Position - minY) * scaleY;
-                    graphics.DrawLine(markerPen, pedalX, pedalY, pedalX, Height);
-                }
+                // Draw the vertical line
+                graphics.DrawLine(linePen, pedalX, 0, pedalX, Height);
             }
         }
     }
