@@ -10,16 +10,14 @@ namespace RacingSimPedals
 
         public PedalDrawingForm()
         {
-            // Start the timer to update the pedal position
             Timer timer = new Timer();
-            timer.Interval = 100; // Set your preferred interval
+            timer.Interval = 100; 
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // Refresh the form to update the drawing
             Invalidate();
         }
 
@@ -32,10 +30,8 @@ namespace RacingSimPedals
 
             using (Pen linePen = new Pen(Color.Blue))
             {
-                // Calculate the position of the pedal on the x-axis
                 float pedalX = (float)pedal1Position * Width / 100;
 
-                // Draw the vertical line
                 graphics.DrawLine(linePen, pedalX, 0, pedalX, Height);
             }
         }
