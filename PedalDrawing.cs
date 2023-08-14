@@ -12,7 +12,7 @@ namespace RacingSimPedals
         public PedalDrawingForm()
         {
             Timer timer = new Timer();
-            timer.Interval = 100; 
+            timer.Interval = 250; 
             timer.Tick += Timer_Tick;
             timer.Start();
         }
