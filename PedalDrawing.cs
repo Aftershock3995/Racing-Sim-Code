@@ -7,12 +7,10 @@ namespace RacingSimPedals
     public class PedalDrawingForm : Form
     {
         public int pedal1Position { get; set; }
-        private Color lineColor; 
+        private Color lineColor = ColorTranslator.FromHtml("#FFFFFF"); 
 
-        public PedalDrawingForm(string hexColor)
+        public PedalDrawingForm()
         {
-            lineColor = ColorTranslator.FromHtml(hexColor);
-
             Timer timer = new Timer();
             timer.Interval = 100; 
             timer.Tick += Timer_Tick;
