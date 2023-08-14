@@ -7,7 +7,7 @@ namespace RacingSimPedals
     public class PedalDrawingForm : Form
     {
         public int pedal1Position { get; set; }
-        private Color lineColor = ColorTranslator.FromHtml("#FFFFFF"); 
+        private Color lineColor = ColorTranslator.FromHtml("#f94c07"); 
 
         public PedalDrawingForm()
         {
