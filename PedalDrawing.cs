@@ -1,18 +1,27 @@
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace RacingSimPedals
 {
     public class PedalDrawingForm : Form
     {
-        public int pedal1Position { get; set; }
-        private Color lineColor = ColorTranslator.FromHtml("#f94c07"); 
+        private float minX = 0f;
+        private float maxX = 1f;
+        private float minY = 0f;
+        private float maxY = 1f;
+
+        private Pen markerPen;
+
+        private Color lineColor = ColorTranslator.FromHtml("#f94c07");
 
         public PedalDrawingForm()
         {
-            Timer timer = new Timer();
-            timer.Interval = 250; 
+            markerPen = new Pen(lineColor, 2.5f);
+
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 250;
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -29,12 +38,12 @@ namespace RacingSimPedals
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen linePen = new Pen(lineColor))
-            {
-                float pedalX = (float)pedal1Position * Width / 100;
-
-                graphics.DrawLine(linePen, pedalX, 0, pedalX, Height);
-            }
+            float scaleX = Width / (maxX - minX);
+            float scaleY = Height / (maxY - minY);
+            float xPosition = 50f;
+            float pedalX = (xPosition - minX) * scaleX;
+            float pedalY = Height;
+            graphics.DrawLine(markerPen, pedalX, pedalY, pedalX, Height - 50);
         }
     }
 }
