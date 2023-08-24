@@ -32,7 +32,7 @@ public class GraphControl : Control
     private float minX = 0f; 
     private float maxX = 1f; 
     private float minY = 0f; 
-    private float maxY = 1f; 
+    private float maxY = 1f;
 
     public GraphControl()
     {
@@ -139,6 +139,10 @@ public class GraphControl : Control
         }
     }
 
+    float newFloat = PedalDrawingForm.desiredX;
+    float desiredY = 200;
+    SerialPort serialPort;
+
     protected override void OnPaint(PaintEventArgs e)
     {
         base.OnPaint(e);
@@ -168,6 +172,11 @@ public class GraphControl : Control
             {
                 graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
             }
+
+            float pedal1Position = (newFloat / scaleX) + minX;
+            float pedalX = (pedal1Position - minX) * scaleX;
+            float pedalY = Height - desiredY;
+            graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
 
             // Border Graph Color
             string hexCode4 = "#f94c07";
