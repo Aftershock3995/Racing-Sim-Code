@@ -1,4 +1,4 @@
-![GitHub all releases](https://img.shields.io/github/downloads/Aftershock3995/ArduinoCodeSystem/total?color=%23ff0000&logo=GitHub) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Aftershock3995/ArduinoCodeSystem?color=%23ff0000&logo=GitHub) 
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Aftershock3995/ArduinoCodeSystem?color=%23ff0000&logo=GitHub) 
 # ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `Pedal Controller Alpha Code`
 
 
@@ -16,7 +16,7 @@ Not done
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `App early alpha preview`
 
-[![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1128727050082074704/image.png)](https://www.youtube.com/watch?v=iks4j7zyanM)
+[![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1128727050082074704/image.png)]()
 <!--https://media.discordapp.net/attachments/868329637602816081/1112906816712609813/image.png-->
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB early alpha preview`
