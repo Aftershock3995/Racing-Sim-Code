@@ -13,7 +13,6 @@ namespace RacingSimPedals
 {
     public static class Program
     {
-        private static PedalDrawingForm pedalDrawingForm;
         private static GraphControl graphControl;
         private static ComboBox? comPortComboBox;
         private static Button? startButton;
@@ -30,6 +29,7 @@ namespace RacingSimPedals
         private static GraphControl pedal1Graph;
         private static GraphControl pedal2Graph;
         private static GraphControl pedal3Graph;
+
         private static string saveFolderPath = "SaveFiles";
         private static List<string> savedConfigurations;
 
@@ -49,6 +49,7 @@ namespace RacingSimPedals
         private static string savesFilePath = "saves.json";
 
         private static Form mainWindow;
+        private static ColorGradient colorGradient;
 
         [STAThread]
         public static void Main()
@@ -60,6 +61,15 @@ namespace RacingSimPedals
             // Full App Color
             string hexCode1 = "#373737";
             Color color1 = ColorTranslator.FromHtml(hexCode1);
+
+            Color startColor = ColorTranslator.FromHtml(hexCode1);
+            Color endColor = Color.Black;
+            colorGradient = new ColorGradient(startColor, endColor);
+
+            System.Windows.Forms.Timer colorTimer = new System.Windows.Forms.Timer();
+            colorTimer.Interval = 150;
+            colorTimer.Tick += ColorTimer_Tick;
+            colorTimer.Start();
 
             // Setting text color
             string hexCode2 = "#949494";
@@ -254,6 +264,101 @@ namespace RacingSimPedals
 
             Application.Run(mainWindow);
         }
+
+        private static void ColorTimer_Tick(object sender, EventArgs e)
+        {
+            Color currentColor = colorGradient.GetColor();
+
+            mainWindow.BackColor = currentColor;
+
+            if (colorGradient.IsTransitionComplete())
+            {
+                colorGradient.Reverse();
+
+                Color tempColor = colorGradient.StartColor;
+                colorGradient.StartColor = colorGradient.EndColor;
+                colorGradient.EndColor = tempColor;
+            }
+        }
+
+        public class ColorGradient
+        {
+            private Color initialStartColor;
+            private Color initialEndColor;
+            private Color startColor;
+            private Color endColor;
+            private int steps;
+            private int currentStep;
+            private bool reverse;
+
+            public bool IsTransitionComplete()
+            {
+                if (reverse)
+                {
+                    return currentStep == 0;
+                }
+                else
+                {
+                    return currentStep == steps - 1;
+                }
+            }
+
+            public Color StartColor
+            {
+                get { return startColor; }
+                set { startColor = value; }
+            }
+
+            public Color EndColor
+            {
+                get { return endColor; }
+                set { endColor = value; }
+            }
+
+            public ColorGradient(Color startColor, Color endColor, int steps = 100)
+            {
+                this.initialStartColor = startColor;
+                this.initialEndColor = endColor;
+                this.startColor = startColor;
+                this.endColor = endColor;
+                this.steps = steps;
+                this.currentStep = 0;
+                this.reverse = false;
+            }
+
+            public void Reverse()
+            {
+                reverse = !reverse;
+                currentStep = steps - currentStep - 1;
+            }
+
+            private void Swap<T>(ref T a, ref T b)
+            {
+                T temp = a;
+                a = b;
+                b = temp;
+            }
+
+            public Color GetColor()
+            {
+                float ratio = (float)currentStep / (steps - 1);
+
+                if (reverse)
+                    ratio = 1 - ratio;
+
+                int red = (int)(initialStartColor.R * (1 - ratio) + initialEndColor.R * ratio);
+                int green = (int)(initialStartColor.G * (1 - ratio) + initialEndColor.G * ratio);
+                int blue = (int)(initialStartColor.B * (1 - ratio) + initialEndColor.B * ratio);
+
+                currentStep = (currentStep + 1) % steps;
+
+                if (currentStep == 0)
+                    Swap(ref initialStartColor, ref initialEndColor);
+
+                return Color.FromArgb(red, green, blue);
+            }
+        }
+
         private static void RenameTextBox_Click(object sender, EventArgs e)
         {
             if (renameTextBox.Text == "Rename Save")

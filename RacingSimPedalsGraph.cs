@@ -26,13 +26,13 @@ public class GraphControl : Control
     public int pedal3Position { get; set; }
     public int[] PedalGraphs { get; set; }
 
-    private const int NumGridLines = 10; 
-    private const float GridSpacing = 0.1f; 
+    private const int NumGridLines = 10;
+    private const float GridSpacing = 0.1f;
 
-    private float minX = 0f; 
-    private float maxX = 1f; 
-    private float minY = 0f; 
-    private float maxY = 1f; 
+    private float minX = 0f;
+    private float maxX = 1f;
+    private float minY = 0f;
+    private float maxY = 1f;
 
     public GraphControl()
     {
@@ -45,7 +45,7 @@ public class GraphControl : Control
 
         // Line Color
         string hexCode3 = "#232424";
-   
+
         Color color1 = ColorTranslator.FromHtml(hexCode1);
         Color color2 = ColorTranslator.FromHtml(hexCode2);
         Color color3 = ColorTranslator.FromHtml(hexCode3);
@@ -139,6 +139,10 @@ public class GraphControl : Control
         }
     }
 
+    float newFloat = PedalDrawingForm.desiredX;
+    float desiredY = 200;
+    SerialPort serialPort;
+
     protected override void OnPaint(PaintEventArgs e)
     {
         base.OnPaint(e);
@@ -168,6 +172,11 @@ public class GraphControl : Control
             {
                 graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
             }
+
+            float pedal1Position = (newFloat / scaleX) + minX;
+            float pedalX = (pedal1Position - minX) * scaleX;
+            float pedalY = Height - desiredY;
+            graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
 
             // Border Graph Color
             string hexCode4 = "#f94c07";
@@ -245,7 +254,7 @@ public class GraphControl : Control
         int graphWidth = ClientSize.Width;
         int graphHeight = ClientSize.Height;
 
-        PointF[] curvePoints = new PointF[dataPoints.Count]; 
+        PointF[] curvePoints = new PointF[dataPoints.Count];
 
         for (int i = 0; i < dataPoints.Count; i++)
         {
@@ -280,7 +289,7 @@ public class GraphControl : Control
 
     private int FindClosestPointIndex(PointF point, float graphWidth, float graphHeight)
     {
-        float thresholdDistance = 8f; 
+        float thresholdDistance = 8f;
 
         for (int i = 0; i < dataPoints.Count; i++)
         {
