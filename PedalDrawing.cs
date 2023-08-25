@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace RacingSimPedals
@@ -11,7 +12,7 @@ namespace RacingSimPedals
 
         public PedalDrawingForm()
         {
-            Timer timer = new Timer();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = 250; 
             timer.Tick += Timer_Tick;
             timer.Start();

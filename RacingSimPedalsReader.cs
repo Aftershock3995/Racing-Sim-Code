@@ -57,8 +57,6 @@ namespace RacingSimPedals
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            pedalDrawingForm = new PedalDrawingForm(pedal1ResponseCurve);
-
             // Full App Color
             string hexCode1 = "#373737";
             Color color1 = ColorTranslator.FromHtml(hexCode1);
@@ -308,7 +306,6 @@ namespace RacingSimPedals
                     Console.WriteLine("Pedal 1 Position: " + position);
 
                     pedal1Position = position;
-                    pedalDrawingForm.Invalidate();
 
                     // Send the parsed position back over the serial port
                     string response = "Pedal 1 Position: " + position;
