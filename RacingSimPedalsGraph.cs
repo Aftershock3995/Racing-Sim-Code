@@ -29,9 +29,10 @@ public class GraphControl : Control
     private const int NumGridLines = 10;
     private const float GridSpacing = 0.1f;
 
+
     private float minX = 0f;
     private float maxX = 1f;
-    private float minY = 0f;
+    private float minY = 0f; 
     private float maxY = 1f;
 
     public GraphControl()
@@ -139,9 +140,7 @@ public class GraphControl : Control
         }
     }
 
-    float newFloat = PedalDrawingForm.desiredX;
     float desiredY = 200;
-    SerialPort serialPort;
 
     protected override void OnPaint(PaintEventArgs e)
     {
@@ -172,6 +171,10 @@ public class GraphControl : Control
             {
                 graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
             }
+
+            PedalDrawingForm.IncrementDesiredX();
+
+            float newFloat = PedalDrawingForm.desiredX; 
 
             float pedal1Position = (newFloat / scaleX) + minX;
             float pedalX = (pedal1Position - minX) * scaleX;

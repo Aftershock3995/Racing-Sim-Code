@@ -283,8 +283,10 @@ namespace RacingSimPedals
 
         public class ColorGradient
         {
+
             private Color initialStartColor;
             private Color initialEndColor;
+
             private Color startColor;
             private Color endColor;
             private int steps;
@@ -318,7 +320,9 @@ namespace RacingSimPedals
             public ColorGradient(Color startColor, Color endColor, int steps = 100)
             {
                 this.initialStartColor = startColor;
+
                 this.initialEndColor = endColor;
+
                 this.startColor = startColor;
                 this.endColor = endColor;
                 this.steps = steps;
