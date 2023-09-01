@@ -172,13 +172,35 @@ public class GraphControl : Control
                 graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
             }
 
-            float newFloat = PedalDrawingForm.desiredX; 
+            if (pedal1Graph && Pedal1GraphActive == 1)
+            {
+                    float newFloat = PedalDrawingForm.desiredX;
+                    float pedal1Position = (newFloat / scaleX) + minX;
+                    float pedalX = (pedal1Position - minX) * scaleX;
+                    float pedalY = Height - desiredY;
+                    graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+                Invalidate();
+            }
 
-            float pedal1Position = (newFloat / scaleX) + minX;
-            float pedalX = (pedal1Position - minX) * scaleX;
-            float pedalY = Height - desiredY;
-            graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
-            Invalidate();
+            if (pedal2Graph && Pedal2GraphActive == 1)
+            {
+                    float newFloat = PedalDrawingForm.desiredX;
+                    float pedal2Position = (newFloat / scaleX) + minX;
+                    float pedalX = (pedal2Position - minX) * scaleX;
+                    float pedalY = Height - desiredY;
+                    graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+                Invalidate();
+            }
+
+            if (pedal3Graph && Pedal3GraphActive == 1)
+            {
+                    float newFloat = PedalDrawingForm.desiredX;
+                    float pedal3Position = (newFloat / scaleX) + minX;
+                    float pedalX = (pedal3Position - minX) * scaleX;
+                    float pedalY = Height - desiredY;
+                    graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+                Invalidate();
+            }
 
             // Border Graph Color
             string hexCode4 = "#f94c07";
