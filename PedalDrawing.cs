@@ -1,12 +1,14 @@
+using RacingSimPedals;
+
 namespace RacingSimPedals
 {
     public class PedalDrawingForm
     {
         public static float desiredX = 1f;
 
-        public static void IncrementDesiredX()
+        public static void IncrementDesiredX(float newPosition)
         {
-            desiredX += .5f;
+            desiredX = newPosition;
 
             if (desiredX > 200f)
             {

@@ -414,6 +414,8 @@ namespace RacingSimPedals
                     int position = int.Parse(data.Split(':')[1].Trim());
                     Console.WriteLine("Pedal 1 Position: " + position);
 
+                    PedalDrawingForm.desiredX = position;
+
                     pedal1Position = position;
 
                     // Send the parsed position back over the serial port

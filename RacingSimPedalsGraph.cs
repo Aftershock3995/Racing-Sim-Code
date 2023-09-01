@@ -172,14 +172,13 @@ public class GraphControl : Control
                 graphics.DrawEllipse(markerPen, point.X - 4, point.Y - 4, 8, 8);
             }
 
-            PedalDrawingForm.IncrementDesiredX();
-
             float newFloat = PedalDrawingForm.desiredX; 
 
             float pedal1Position = (newFloat / scaleX) + minX;
             float pedalX = (pedal1Position - minX) * scaleX;
             float pedalY = Height - desiredY;
             graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+            Invalidate();
 
             // Border Graph Color
             string hexCode4 = "#f94c07";
