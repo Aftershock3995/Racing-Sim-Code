@@ -20,7 +20,7 @@ Not done
 <!--https://media.discordapp.net/attachments/868329637602816081/1112906816712609813/image.png-->
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB early beta preview`
-[![Watch the video](https://media.discordapp.net/attachments/754866425855868963/1150226409122435072/image.png)]()
+[![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1150278387034763284/image.png)]()
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `Credits`
 This code was created by Aftershock.
