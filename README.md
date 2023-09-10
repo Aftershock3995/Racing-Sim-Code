@@ -6,7 +6,7 @@ This code is in early alpha; the app code has not been published, as well as the
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `Installation`
 Download and install the Arduino IDE.
-Connect the Arduino board to your computer.
+Connect the Teensy board to your computer.
 Open the .ino file in the Arduino IDE.
 Compile and upload the code to the board.
 Connect the stepper motors, encoders, limit switches, and load cells to the appropriate pins on the board.
