@@ -174,7 +174,7 @@ public class GraphControl : Control
 
             if (pedal1Graph && Pedal1GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desiredX;
+                    float newFloat = PedalDrawingForm.desiredX1;
                     float pedal1Position = (newFloat / scaleX) + minX;
                     float pedalX = (pedal1Position - minX) * scaleX;
                     float pedalY = Height - desiredY;
@@ -184,7 +184,7 @@ public class GraphControl : Control
 
             if (pedal2Graph && Pedal2GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desiredX;
+                    float newFloat = PedalDrawingForm.desiredX2;
                     float pedal2Position = (newFloat / scaleX) + minX;
                     float pedalX = (pedal2Position - minX) * scaleX;
                     float pedalY = Height - desiredY;
@@ -194,7 +194,7 @@ public class GraphControl : Control
 
             if (pedal3Graph && Pedal3GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desiredX;
+                    float newFloat = PedalDrawingForm.desired3;
                     float pedal3Position = (newFloat / scaleX) + minX;
                     float pedalX = (pedal3Position - minX) * scaleX;
                     float pedalY = Height - desiredY;
