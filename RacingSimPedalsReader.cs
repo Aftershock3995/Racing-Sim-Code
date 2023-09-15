@@ -414,7 +414,7 @@ namespace RacingSimPedals
                     int position = int.Parse(data.Split(':')[1].Trim());
                     Console.WriteLine("Pedal 1 Position: " + position);
 
-                    PedalDrawingForm.desiredX = position;
+                    PedalDrawingForm.desiredX1 = position;
 
                     pedal1Position = position;
 
@@ -432,6 +432,9 @@ namespace RacingSimPedals
                 {
                     int position = int.Parse(data.Split(':')[1].Trim());
                     Console.WriteLine("Pedal 2 Position: " + position);
+
+                    PedalDrawingForm.desiredX2 = position;
+
                     pedal2Position = position;
 
                     // Send the parsed position back over the serial port
@@ -448,6 +451,9 @@ namespace RacingSimPedals
                 {
                     int position = int.Parse(data.Split(':')[1].Trim());
                     Console.WriteLine("Pedal 3 Position: " + position);
+
+                    PedalDrawingForm.desiredX3 = position;
+
                     pedal3Position = position;
 
                     // Send the parsed position back over the serial port
