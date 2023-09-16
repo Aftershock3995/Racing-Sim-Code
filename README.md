@@ -19,7 +19,7 @@ Not done
 [![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1150267019825000518/image.png)]()
 <!--https://media.discordapp.net/attachments/868329637602816081/1112906816712609813/image.png-->
 
-### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB early beta preview`
+### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB beta preview`
 [![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1152592707819143178/image.png)]()
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `Credits`
