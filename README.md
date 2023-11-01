@@ -11,6 +11,25 @@ Open the .ino file in the Arduino IDE.
 Compile and upload the code to the board.
 Connect the stepper motors, encoders, limit switches, and load cells to the appropriate pins on the board.
 
+### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `To-Do`
+- [ ] `E-stop`
+- [ ] `Bluetooth`
+- [ ] `Ethernet`
+- [ ] `RTC`
+- [ ] `Status LED`
+- [ ] `Interrupt-Driven Sensor Handling`
+- [ ] `Real-Time Operating System`
+- [ ] `Sensor Read Threads`
+- [ ] `Data Processing Threads`
+- [ ] `Communication Threads`
+- [ ] `Thread Synchronization`
+- [ ] `Parallel Processing`
+
+### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `In Progress`
+- [X] `Pedal Position Line Threading`
+- [X] `Line To Json Converting`
+- [X] `EMMC Modules`
+
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `Usage`
 Not done 
 
@@ -19,7 +38,7 @@ Not done
 [![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1150267019825000518/image.png)]()
 <!--https://media.discordapp.net/attachments/868329637602816081/1112906816712609813/image.png-->
 
-### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB beta preview`
+### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB beta preview V2 (V3 In Progress)`
 [![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1152592707819143178/image.png)]()
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `Credits`
