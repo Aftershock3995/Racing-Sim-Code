@@ -15,7 +15,7 @@ Connect the stepper motors, encoders, limit switches, and load cells to the appr
 - [ ] `E-stop`
 - [ ] `Bluetooth`
 - [ ] `Ethernet`
-- [ ] `RTC`
+- [X] `RTC`
 - [ ] `Status LED`
 - [ ] `Interrupt-Driven Sensor Handling`
 - [ ] `Real-Time Operating System`
