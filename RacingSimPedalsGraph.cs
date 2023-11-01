@@ -194,7 +194,7 @@ public class GraphControl : Control
 
             if (pedal3Graph && Pedal3GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desired3;
+                    float newFloat = PedalDrawingForm.desiredX3;
                     float pedal3Position = (newFloat / scaleX) + minX;
                     float pedalX = (pedal3Position - minX) * scaleX;
                     float pedalY = Height - desiredY;
