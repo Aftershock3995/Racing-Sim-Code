@@ -12,11 +12,11 @@ Compile and upload the code to the board.
 Connect the stepper motors, encoders, limit switches, and load cells to the appropriate pins on the board.
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `To-Do`
-- [ ] `E-stop`
+- [X] `E-stop`
 - [ ] `Bluetooth`
 - [ ] `Ethernet`
 - [X] `RTC`
-- [ ] `Status LED`
+- [X] `Status LED`
 - [ ] `Interrupt-Driven Sensor Handling`
 - [ ] `Real-Time Operating System`
 - [ ] `Sensor Read Threads`
