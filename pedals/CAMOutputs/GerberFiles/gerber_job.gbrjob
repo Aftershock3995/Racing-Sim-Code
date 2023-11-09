@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2023-11-08T20:45:37Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.6.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.99,
+        "LayerNumber": 4,
+        "Name": {
+            "ProjectId": "pedal"
+        },
+        "Owner": "Jordan Chrestensen <chrestej6@gmail.com>",
+        "Size": {
+            "X": 67,
+            "Y": 78
+        }
+    }
+}
