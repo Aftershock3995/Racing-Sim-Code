@@ -41,7 +41,7 @@ Not done
 [![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1150267019825000518/image.png)]()
 <!--https://media.discordapp.net/attachments/868329637602816081/1112906816712609813/image.png-->
 
-### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB V3)`
+### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `PCB V3`
 [![Watch the video](https://media.discordapp.net/attachments/868329637602816081/1171928522772721794/image.png?ex=655e767d&is=654c017d&hm=10aed12730452959cce09556088bb8a0133ccdf6d174c20046b3276dbe03d7ce&=)]()
 
 [comment]: <> (https://media.discordapp.net/attachments/868329637602816081/1152592707819143178/image.png)
