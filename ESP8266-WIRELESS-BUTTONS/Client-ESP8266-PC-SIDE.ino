@@ -12,7 +12,6 @@ void setup()
 {
   Serial.begin(115200);
 
-  // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) 
   {
