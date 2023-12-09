@@ -414,12 +414,15 @@ namespace RacingSimPedals
                     int position = int.Parse(data.Split(':')[1].Trim());
                     Console.WriteLine("Pedal 1 Position: " + position);
 
-                    PedalDrawingForm.desiredX1 = position;
+                    // Interpolate the value based on the pedal position
+                    float interpolatedValue = InterpolateValue(position, pedal1ResponseCurve);
+                    Console.WriteLine("Interpolated Value: " + interpolatedValue);
 
+                    PedalDrawingForm.desiredX1 = position;
                     pedal1Position = position;
 
-                    // Send the parsed position back over the serial port
-                    string response = "Pedal 1 Position: " + position;
+                    // Send the parsed position and interpolated value back over the serial port
+                    string response = $"Pedal 1 Position: {position}, Interpolated Value: {interpolatedValue}";
                     sp.WriteLine(response);
 
                     // Display the sent data in the dataTextBox
@@ -529,6 +532,25 @@ namespace RacingSimPedals
                 dataTextBox.AppendText("Pedal 2 Position: " + pedal2Position + Environment.NewLine);
                 dataTextBox.AppendText("Pedal 3 Position: " + pedal3Position + Environment.NewLine);
             }));
+        }
+
+        private static float InterpolateValue(int pedalPosition, List<PointF> responseCurve)
+        {
+            // Assuming pedal position ranges from 0 to 200
+            float normalizedPosition = (float)pedalPosition / 200;
+
+            // Generate the smooth curve using the provided points
+            List<PointF> smoothCurve = GenerateSmoothCurve(responseCurve);
+
+            // Create cubic spline interpolation object
+            double[] x = smoothCurve.Select(p => (double)p.X).ToArray();
+            double[] y = smoothCurve.Select(p => (double)p.Y).ToArray();
+            CubicSpline spline = CubicSpline.InterpolateNatural(x, y);
+
+            // Interpolate the value
+            double interpolatedY = spline.Interpolate(normalizedPosition);
+
+            return (float)interpolatedY;
         }
 
         private static string ConvertResponseCurveToString(List<PointF> curve)
