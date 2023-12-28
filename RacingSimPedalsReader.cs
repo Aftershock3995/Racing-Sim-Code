@@ -155,6 +155,26 @@ namespace RacingSimPedals
             removePointButton.FlatAppearance.BorderColor = (color3);
             removePointButton.FlatAppearance.BorderSize = 1;
 
+            Button homePedalsButton = new Button();
+            homePedalsButton.Name = "HomePedalsButton";
+            homePedalsButton.Location = new Point(370, 250);
+            homePedalsButton.Text = "Home Pedals";
+            homePedalsButton.Click += HomePedalsButton_Click;
+            homePedalsButton.ForeColor = (color2);
+            homePedalsButton.FlatStyle = FlatStyle.Flat;
+            homePedalsButton.FlatAppearance.BorderColor = (color3);
+            homePedalsButton.FlatAppearance.BorderSize = 1;
+
+            Button CreateArrayButton = new Button();
+            CreateArrayButton.Name = "CreateArrayButton";
+            CreateArrayButton.Location = new Point(460, 250);
+            CreateArrayButton.Text = "Create Array";
+            CreateArrayButton.Click += CreateArrayButton_Click;
+            CreateArrayButton.ForeColor = (color2);
+            CreateArrayButton.FlatStyle = FlatStyle.Flat;
+            CreateArrayButton.FlatAppearance.BorderColor = (color3);
+            CreateArrayButton.FlatAppearance.BorderSize = 1;
+
             saveButton = new Button();
             saveButton.Location = new Point(300, 10);
             saveButton.Text = "Save";
@@ -225,6 +245,8 @@ namespace RacingSimPedals
             mainWindow.Controls.Add(resetButton);
             mainWindow.Controls.Add(addPointButton);
             mainWindow.Controls.Add(removePointButton);
+            mainWindow.Controls.Add(homePedalsButton);
+            mainWindow.Controls.Add(CreateArrayButton);
 
             pedal1ResponseCurve = new List<PointF>()
     {
@@ -396,80 +418,106 @@ namespace RacingSimPedals
 
         public static void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            GraphControl graphControl = new GraphControl();
-
             SerialPort sp = (SerialPort)sender;
             string data = sp.ReadLine();
 
             if (!string.IsNullOrEmpty(data))
             {
-                // Use the Invoke method to update the dataTextBox from the main thread
                 dataTextBox.Invoke(new Action(() =>
                 {
                     dataTextBox.AppendText("Received: " + data + Environment.NewLine);
                 }));
 
+                int pedalIndex = -1;
                 if (data.Contains("Pedal 1 Position:"))
                 {
-                    int position = int.Parse(data.Split(':')[1].Trim());
-                    Console.WriteLine("Pedal 1 Position: " + position);
-
-                    // Interpolate the value based on the pedal position
-                    float interpolatedValue = InterpolateValue(position, pedal1ResponseCurve);
-                    Console.WriteLine("Interpolated Value: " + interpolatedValue);
-
-                    PedalDrawingForm.desiredX1 = position;
-                    pedal1Position = position;
-
-                    // Send the parsed position and interpolated value back over the serial port
-                    string response = $"Pedal 1 Position: {position}, Interpolated Value: {interpolatedValue}";
-                    sp.WriteLine(response);
-
-                    // Display the sent data in the dataTextBox
-                    dataTextBox.Invoke(new Action(() =>
-                    {
-                        dataTextBox.AppendText("Sent: " + response + Environment.NewLine);
-                    }));
+                    pedalIndex = 1;
                 }
                 else if (data.Contains("Pedal 2 Position:"))
                 {
-                    int position = int.Parse(data.Split(':')[1].Trim());
-                    Console.WriteLine("Pedal 2 Position: " + position);
-
-                    PedalDrawingForm.desiredX2 = position;
-
-                    pedal2Position = position;
-
-                    // Send the parsed position back over the serial port
-                    string response = "Pedal 2 Position: " + position;
-                    sp.WriteLine(response);
-
-                    // Display the sent data in the dataTextBox
-                    dataTextBox.Invoke(new Action(() =>
-                    {
-                        dataTextBox.AppendText("Sent: " + response + Environment.NewLine);
-                    }));
+                    pedalIndex = 2;
                 }
                 else if (data.Contains("Pedal 3 Position:"))
                 {
-                    int position = int.Parse(data.Split(':')[1].Trim());
-                    Console.WriteLine("Pedal 3 Position: " + position);
-
-                    PedalDrawingForm.desiredX3 = position;
-
-                    pedal3Position = position;
-
-                    // Send the parsed position back over the serial port
-                    string response = "Pedal 3 Position: " + position;
-                    sp.WriteLine(response);
-
-                    // Display the sent data in the dataTextBox
-                    dataTextBox.Invoke(new Action(() =>
-                    {
-                        dataTextBox.AppendText("Sent: " + response + Environment.NewLine);
-                    }));
+                    pedalIndex = 3;
                 }
+
+                if (pedalIndex != -1)
+                {
+                    HandlePedalData(data, pedalIndex, sp);
+                }
+
             }
+        }
+
+        private static void HandlePedalData(string data, int pedalIndex, SerialPort serialPort)
+        {
+            int position = int.Parse(data.Split(':')[1].Trim());
+            Console.WriteLine($"Pedal {pedalIndex} Position: {position}");
+
+            List<PointF>? responseCurve = GetResponseCurveByPedalIndex(pedalIndex);
+
+            if (responseCurve != null)
+            {
+                float interpolatedValue = InterpolateValue(position, responseCurve);
+                Console.WriteLine($"Interpolated Value for Pedal {pedalIndex}: {interpolatedValue}");
+
+                GetGraphByPedalIndex(pedalIndex)?.RefreshGraph(responseCurve);
+
+                string response = $"Pedal {pedalIndex} Position: {position}, Interpolated Value: {interpolatedValue}";
+                serialPort.WriteLine(response);
+
+                // Update the desiredX value based on pedalIndex
+                UpdateDesiredX(pedalIndex, position);
+
+                dataTextBox.Invoke(new Action(() =>
+                {
+                    dataTextBox.AppendText("Sent: " + response + Environment.NewLine);
+                }));
+            }
+        }
+
+        private static void UpdateDesiredX(int pedalIndex, int position)
+        {
+            switch (pedalIndex)
+            {
+                case 1:
+                    PedalDrawingForm.desiredX1 = position;
+                    pedal1Position = position;
+                    break;
+                case 2:
+                    PedalDrawingForm.desiredX2 = position;
+                    pedal2Position = position;
+                    break;
+                case 3:
+                    PedalDrawingForm.desiredX3 = position;
+                    pedal3Position = position;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static List<PointF>? GetResponseCurveByPedalIndex(int pedalIndex)
+        {
+            return pedalIndex switch
+            {
+                1 => pedal1ResponseCurve,
+                2 => pedal2ResponseCurve,
+                3 => pedal3ResponseCurve,
+                _ => null,
+            };
+        }
+
+        private static GraphControl? GetGraphByPedalIndex(int pedalIndex)
+        {
+            return pedalIndex switch
+            {
+                1 => pedal1Graph,
+                2 => pedal2Graph,
+                3 => pedal3Graph,
+                _ => null,
+            };
         }
 
         private static void EditButton_Click(object sender, EventArgs e)
@@ -536,7 +584,7 @@ namespace RacingSimPedals
 
         private static float InterpolateValue(int pedalPosition, List<PointF> responseCurve)
         {
-            // Assuming pedal position ranges from 0 to 200
+            // Pedal position (should) range from 0 to 200
             float normalizedPosition = (float)pedalPosition / 200;
 
             // Generate the smooth curve using the provided points
@@ -694,6 +742,74 @@ namespace RacingSimPedals
             pedal1Graph.Pedal1GraphActive = 1;
             pedal2Graph.Pedal2GraphActive = 1;
             pedal3Graph.Pedal3GraphActive = 1;
+        }
+
+        private static void HomePedalsButton_Click(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                string command = "HomePedals";
+                serialPort.WriteLine(command);
+
+                string acknowledgment = serialPort.ReadLine();
+
+                dataTextBox.Invoke(new Action(() =>
+                {
+                    dataTextBox.AppendText("Sent command: " + command + Environment.NewLine);
+                }));
+
+                Console.WriteLine("Sent command: " + command);
+            }
+        }
+
+        private static void CreateArrayButton_Click(object sender, EventArgs e)
+        {
+            // Create an array to store pedal positions and their interpolated values
+            List<Dictionary<string, object>> dataArray = new List<Dictionary<string, object>>();
+
+            // Loop through pedal positions from 1 to 200
+            for (int position = 1; position <= 200; position++)
+            {
+                // Get interpolated values for each pedal
+                float interpolatedValue1 = InterpolateValue(position, pedal1ResponseCurve);
+                float interpolatedValue2 = InterpolateValue(position, pedal2ResponseCurve);
+                float interpolatedValue3 = InterpolateValue(position, pedal3ResponseCurve);
+
+                // Add data to the array for each pedal
+                var pedalData1 = new Dictionary<string, object>
+        {
+            { "Position", position },
+            { "Pedal", "Pedal1" },
+            { "InterpolatedValue", interpolatedValue1 }
+        };
+                dataArray.Add(pedalData1);
+
+                var pedalData2 = new Dictionary<string, object>
+        {
+            { "Position", position },
+            { "Pedal", "Pedal2" },
+            { "InterpolatedValue", interpolatedValue2 }
+        };
+                dataArray.Add(pedalData2);
+
+                var pedalData3 = new Dictionary<string, object>
+        {
+            { "Position", position },
+            { "Pedal", "Pedal3" },
+            { "InterpolatedValue", interpolatedValue3 }
+        };
+                dataArray.Add(pedalData3);
+            }
+
+            // Display or process the dataArray as needed
+            foreach (var data in dataArray)
+            {
+                Console.WriteLine($"Position: {data["Position"]}, Pedal: {data["Pedal"]}, InterpolatedValue: {data["InterpolatedValue"]}");
+            }
+
+            // Serialize the array to a JSON string and save it to a file
+            string jsonString = JsonConvert.SerializeObject(dataArray, Formatting.Indented);
+            File.WriteAllText("pedal_data.json", jsonString);
         }
 
         private static void SaveButton_Click(object sender, EventArgs e)
