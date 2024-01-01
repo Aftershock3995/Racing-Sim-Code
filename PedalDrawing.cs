@@ -1,33 +1,28 @@
-using RacingSimPedals;
-
-namespace RacingSimPedals
+public static class PedalDrawingForm
 {
-    public class PedalDrawingForm
+    public static float desiredX1 = 1f;
+    public static float desiredX2 = 1f;
+    public static float desiredX3 = 1f;
+
+    public static void IncrementDesiredX(float newPosition1, float newPosition2, float newPosition3)
     {
-        public static float desiredX1 = 1f;
-        public static float desiredX2 = 1f;
-        public static float desiredX3 = 1f;
+        desiredX1 = newPosition1;
+        desiredX2 = newPosition2;
+        desiredX3 = newPosition3;
 
-        public static void IncrementDesiredX(float newPosition)
+        if (desiredX1 > 200f)
         {
-            desiredX1 = newPosition;
-            desiredX2 = newPosition;
-            desiredX3 = newPosition;
+            desiredX1 = 1f;
+        }
 
-            if (desiredX1 > 200f)
-            {
-                desiredX1 = 1f;
-            }
+        if (desiredX2 > 200f)
+        {
+            desiredX2 = 1f;
+        }
 
-            else if (desiredX2 > 200f)
-            {
-                desiredX2 = 1f;
-            }
-
-            else if (desiredX3 > 200f)
-            {
-                desiredX3 = 1f;
-            }
+        if (desiredX3 > 200f)
+        {
+            desiredX3 = 1f;
         }
     }
 }

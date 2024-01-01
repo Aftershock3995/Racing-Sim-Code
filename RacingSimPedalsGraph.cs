@@ -174,31 +174,28 @@ public class GraphControl : Control
 
             if (pedal1Graph && Pedal1GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desiredX1;
-                    float pedal1Position = (newFloat / scaleX) + minX;
-                    float pedalX = (pedal1Position - minX) * scaleX;
-                    float pedalY = Height - desiredY;
-                    graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+                float pedal1Position = (PedalDrawingForm.desiredX1 / scaleX) + minX;
+                float pedalX = (pedal1Position - minX) * scaleX;
+                float pedalY = Height - desiredY;
+                graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
                 Invalidate();
             }
 
             if (pedal2Graph && Pedal2GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desiredX2;
-                    float pedal2Position = (newFloat / scaleX) + minX;
-                    float pedalX = (pedal2Position - minX) * scaleX;
-                    float pedalY = Height - desiredY;
-                    graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+                float pedal2Position = (PedalDrawingForm.desiredX2 / scaleX) + minX;
+                float pedalX = (pedal2Position - minX) * scaleX;
+                float pedalY = Height - desiredY;
+                graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
                 Invalidate();
             }
 
             if (pedal3Graph && Pedal3GraphActive == 1)
             {
-                    float newFloat = PedalDrawingForm.desiredX3;
-                    float pedal3Position = (newFloat / scaleX) + minX;
-                    float pedalX = (pedal3Position - minX) * scaleX;
-                    float pedalY = Height - desiredY;
-                    graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
+                float pedal3Position = (PedalDrawingForm.desiredX3 / scaleX) + minX;
+                float pedalX = (pedal3Position - minX) * scaleX;
+                float pedalY = Height - desiredY;
+                graphics.DrawLine(markerPen2, pedalX, pedalY, pedalX, Height);
                 Invalidate();
             }
 

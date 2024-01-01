@@ -26,7 +26,7 @@ Connect the stepper motors, encoders, limit switches, and load cells to the appr
 - [ ] `Parallel Processing`
 - [ ] `In-Game Overlay`
 - [ ] `Potential MCU Swap`
-- [ ] `Graph Line -> Force`
+- [X] `Graph Line -> Force`
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `In Progress`
 - [X] `Pedal Position Line Threading`

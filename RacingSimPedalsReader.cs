@@ -698,7 +698,7 @@ namespace RacingSimPedals
                 pedal3Graph.RefreshGraph(pedal3ResponseCurve);
             }
 
-            // Check the current active graph and prevent it from being deactivated
+            // Check the current active graph and prevent it from being deactivated not working
             if (pedal1Graph.Pedal1GraphActive == 1)
                 pedal1Graph.Pedal1GraphActive = 1;
             else if (pedal2Graph.Pedal2GraphActive == 1)
