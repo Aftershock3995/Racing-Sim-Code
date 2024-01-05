@@ -17,15 +17,7 @@ Connect the stepper motors, encoders, limit switches, and load cells to the appr
 - [X] `Ethernet`
 - [X] `RTC`
 - [X] `Status LED`
-- [ ] `Interrupt-Driven Sensor Handling`
-- [ ] `Real-Time Operating System`
-- [ ] `Sensor Read Threads`
-- [ ] `Data Processing Threads`
-- [ ] `Communication Threads`
-- [ ] `Thread Synchronization`
-- [ ] `Parallel Processing`
 - [ ] `In-Game Overlay`
-- [ ] `Potential MCU Swap`
 - [X] `Graph Line -> Force`
 
 ### ![#1589F0](https://cdn.discordapp.com/attachments/868329637602816081/1140690942861508780/Untitled.png) `In Progress`
